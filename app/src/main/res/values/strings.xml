@@ -1,0 +1,14 @@
+<resources>
+    <string name="app_name">ShinyPenny</string>
+    <string name="title_activity_main">MainActivity</string>
+
+    <string name="hello_world">Hello world!</string>
+    <string name="action_settings">Settings</string>
+    <string name="title_activity_add_new">AddNewActivity</string>
+
+    <string name="amount" >Amount</string>
+    <string name="category">Category</string>
+    <string name="cycle">Cycle</string>
+    <string name="date">Date</string>
+    <string name="submit">Submit</string>
+</resources>
