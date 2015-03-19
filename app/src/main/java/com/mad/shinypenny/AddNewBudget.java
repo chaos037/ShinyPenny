@@ -13,6 +13,8 @@ import android.widget.Spinner;
 
 import com.mad.shinypenny.Logic.BudgetDataSource;
 import com.mad.shinypenny.data.BudgetCategory;
+import com.mad.shinypenny.data.RecurringItem;
+import com.mad.shinypenny.data.TransactionItem;
 
 import java.sql.SQLException;
 import java.util.List;
@@ -93,9 +95,13 @@ public class AddNewBudget extends ActionBarActivity {
     }
 
     public void addNewBudget(View view) {
-        spnBudgetCategory.getSelectedItemPosition();
+        RecurringItem newRecurringItem = new RecurringItem();
+        TransactionItem newTransactionItem = new TransactionItem();
+
+        spnBudgetCategory.getSelectedItem().toString();
         spnCycleCategory.getSelectedItem().toString();
         edtBudgetAmount.getText().toString();
+
     }
 }
 

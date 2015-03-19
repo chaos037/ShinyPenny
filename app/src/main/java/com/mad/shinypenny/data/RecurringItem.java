@@ -14,6 +14,10 @@ public class RecurringItem {
     private Date EndDate;
     private double Value;
 
+    public RecurringItem() {
+
+    }
+
     public RecurringItem(String ID, String categoryID, String cycle, Date beginDate, Date endDate, double value) {
         this.ID = ID;
         CategoryID = categoryID;
