@@ -9,6 +9,7 @@
     <string name="amount" >Amount</string>
     <string name="category">Category</string>
     <string name="cycle">Cycle</string>
-    <string name="date">Date</string>
+    <string name="startDate">Start Date</string>
+    <string name="endDate">End Date</string>
     <string name="submit">Submit</string>
 </resources>
