@@ -1,4 +1,4 @@
-package com.mad.shinypenny;
+package com.mad.shinypenny.data;
 
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
@@ -25,57 +25,69 @@ public class DBHelper extends SQLiteOpenHelper {
     public static final String TABLE_TransactionItem = "transactionItem";
     public static final String TABLE_RecurringItem = "recurringItem";
 
-//    // Common column names
-//    private static final String KEY_ID = "id";
-//    private static final String KEY_CREATED_AT = "created_at";
+    // Expense Category Table - column names
+    public static final String KEY_eId = "eId";
+    public static final String KEY_eName = "eName";
 
-    // Expense , Income , Budget Table - column nmaes
-    public static final String KEY_id = "id";
-    public static final String KEY_name = "name";
+    // Budget Category Table - column names
+    public static final String KEY_bId = "bId";
+    public static final String KEY_bName = "bName";
 
-    // TransactionItem Table - column names
-    public static final String KEY_recurr_ID = "recurrid";
-    public static final String KEY_category_ID = "categoryid";
-    public static final String KEY_date = "date";
-    public static final String KEY_value = "value";
+    // Income Category Table - column names
+    public static final String KEY_iId = "iId";
+    public static final String KEY_iName = "iName";
+
+
+    // TransactionItem Table - column names (recurr id below)
+    public static final String KEY_tId = "tId";
+    public static final String KEY_tCategory_ID = "tCategoryid";
+    public static final String KEY_tDate = "tDate";
+    public static final String KEY_tValue = "tValue";
 
     // RecurringItem Table - column names
-    public static final String KEY_endDate = "endDate";
-    public static final String KEY_beginDate = "beingDate";
-    public static final String KEY_cycle = "cycle";
+    public static final String KEY_rId = "rid";
+    public static final String KEY_rCategory_ID = "rCategoryid";
+    public static final String KEY_rEndDate = "rEndDate";
+    public static final String KEY_rBeginDate = "rBeginDate";
+    public static final String KEY_rCycle = "rCycle";
+    public static final String KEY_rValue = "rValue";
 
     // Table Create Statements
     // Expense table create statement
     private static final String CREATE_TABLE_Expense = "CREATE TABLE " + TABLE_Expense + "("
-            + KEY_id + " TEXT PRIMARY KEY,"
-            + KEY_name + " TEXT)";
+            + KEY_eId + " TEXT PRIMARY KEY,"
+            + KEY_eName + " TEXT)";
 
     // Income table create statement
     private static final String CREATE_TABLE_Income = "CREATE TABLE " + TABLE_Income + "("
-            + KEY_id + " TEXT PRIMARY KEY,"
-            + KEY_name + " TEXT)";
+            + KEY_iId + " TEXT PRIMARY KEY,"
+            + KEY_iName + " TEXT)";
 
     // Budget table create statement
     private static final String CREATE_TABLE_Budget = "CREATE TABLE " + TABLE_Budget + "("
-            + KEY_id + " TEXT PRIMARY KEY,"
-            + KEY_name + " TEXT)";
+            + KEY_bId + " TEXT PRIMARY KEY,"
+            + KEY_bName + " TEXT)";
 
     //TransactionItem table create statement
     private static final String CREATE_TABLE_TRANSACTIONITEM = "CREATE TABLE "+ TABLE_TransactionItem + "("
-            + KEY_id + " TEXT PRIMARY KEY,"
-            + KEY_recurr_ID + " TEXT,"
-            + KEY_category_ID + " TEXT,"
-            + KEY_date + " Date,"
-            + KEY_value + " double)";
+            + KEY_tId + " TEXT PRIMARY KEY,"
+            + KEY_rId + " TEXT,"
+            + KEY_tCategory_ID + " TEXT,"
+            + KEY_tDate + " Date,"
+            + KEY_tValue + " double," +
+            "FOREIGN KEY ("+ KEY_rId +") REFERENCES "+ TABLE_RecurringItem+"("+KEY_rId +"))";
 
     //RecurringItem table create statement
     private static final String CREATE_TABLE_RECURRINGTEM = "CREATE TABLE " + TABLE_RecurringItem + "("
-            + KEY_id + " TEXT PRIMARY KEY,"
-            + KEY_category_ID + " TEXT,"
-            + KEY_cycle + " TEXT,"
-            + KEY_beginDate + " Date,"
-            + KEY_endDate + " Date,"
-            + KEY_value + " double)";
+            + KEY_rId + " TEXT PRIMARY KEY,"
+            + KEY_rCategory_ID + " TEXT,"
+            + KEY_rCycle + " TEXT,"
+            + KEY_rBeginDate + " Date,"
+            + KEY_rEndDate + " Date,"
+            + KEY_rValue + " double," +
+            "FOREIGN KEY ("+ KEY_rCategory_ID +") REFERENCES "+ TABLE_Expense+"("+KEY_eId +")," +
+            "FOREIGN KEY ("+ KEY_rCategory_ID +") REFERENCES "+ TABLE_Budget+"("+KEY_bId +")," +
+            "FOREIGN KEY ("+ KEY_rCategory_ID +") REFERENCES "+ TABLE_Income+"("+KEY_iId +"));";
 
     private static final String Insert_Budget_Category = "INSERT INTO " + TABLE_Budget + " VALUES('B1', 'Car Loan');"
             + " INSERT INTO " + TABLE_Budget + " VALUES('B2', 'Edu Loan');"
@@ -119,8 +131,9 @@ public class DBHelper extends SQLiteOpenHelper {
         for(String query : queries){
             db.execSQL(query);
         }
-        db.execSQL(CREATE_TABLE_TRANSACTIONITEM);
         db.execSQL(CREATE_TABLE_RECURRINGTEM);
+        db.execSQL(CREATE_TABLE_TRANSACTIONITEM);
+
     }
 
     @Override
@@ -136,21 +149,7 @@ public class DBHelper extends SQLiteOpenHelper {
         onCreate(db);
     }
 
-    //Creating a Expense
 
-//    public long createExpense(Expense expense) {
-//        SQLiteDatabase db = this.getWritableDatabase();
-//
-//        ContentValues values = new ContentValues();
-//        values.put(KEY_id, String.valueOf(expense.getID()));
-//        values.put(KEY_name, String.valueOf(expense.getName()));
-//
-//        // insert row
-//        long expense_id = db.insert(TABLE_Expense, null, values);
-//
-//        return expense_id;
-//
-//    }
 
     // closing database
     public void closeDB() {

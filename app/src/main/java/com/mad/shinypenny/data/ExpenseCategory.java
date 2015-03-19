@@ -1,20 +1,18 @@
-package com.mad.shinypenny;
+package com.mad.shinypenny.data;
 
 /**
  * Created by WeiYang on 3/16/2015.
  */
-public class Income {
+public class ExpenseCategory {
 
     private String ID;
     private String Name;
+    public ExpenseCategory() {
 
-    public Income(String ID, String name) {
+    }
+    public ExpenseCategory(String ID, String name) {
         this.ID = ID;
         Name = name;
-    }
-
-    public Income() {
-
     }
 
     public String getID() {
@@ -33,3 +31,4 @@ public class Income {
         Name = name;
     }
 }
+

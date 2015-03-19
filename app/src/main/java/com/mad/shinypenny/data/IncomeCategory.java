@@ -1,19 +1,19 @@
-package com.mad.shinypenny;
+package com.mad.shinypenny.data;
 
 /**
  * Created by WeiYang on 3/16/2015.
  */
-public class Budget {
+public class IncomeCategory {
 
     private String ID;
     private String Name;
 
-    public Budget(String ID, String name) {
+    public IncomeCategory(String ID, String name) {
         this.ID = ID;
         Name = name;
     }
 
-    public Budget() {
+    public IncomeCategory() {
 
     }
 

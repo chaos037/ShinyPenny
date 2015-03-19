@@ -10,8 +10,10 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import com.mad.shinypenny.Logic.BudgetDataSource;
+import com.mad.shinypenny.data.BudgetCategory;
+
 import java.sql.SQLException;
-import java.util.ArrayList;
 import java.util.List;
 
 
@@ -64,7 +66,7 @@ public class MainActivity extends ActionBarActivity {
     }
 
     public void addBudget(View view){
-        Budget budget = new Budget(budgetId.getText().toString(),budgetName.getText().toString());
+        BudgetCategory budget = new BudgetCategory(budgetId.getText().toString(),budgetName.getText().toString());
         long l = budgetDataSource.createBudget(budget);
         if(l!=-1) {
             Log.e(null, String.valueOf( l));
@@ -74,13 +76,13 @@ public class MainActivity extends ActionBarActivity {
     }
 
     public void retrieveBudget(View view){
-        Budget budget = budgetDataSource.getBudget(budgetId.getText().toString());
+        BudgetCategory budget = budgetDataSource.getBudget(budgetId.getText().toString());
         budgetId.setText(budget.getID());
         budgetName.setText(budget.getName());
     }
 
     public void updateBudget(View view){
-        Budget budget = new Budget(budgetId.getText().toString(),budgetName.getText().toString());
+        BudgetCategory budget = new BudgetCategory(budgetId.getText().toString(),budgetName.getText().toString());
         budgetDataSource.updateBudget(budget);
         budgetId.setText(null);
         budgetName.setText(null);
@@ -91,7 +93,7 @@ public class MainActivity extends ActionBarActivity {
     }
 
     public void retrieveAllBudget(View view){
-        List<Budget> budgetList = budgetDataSource.retrieveAllBudget();
+        List<BudgetCategory> budgetList = budgetDataSource.retrieveAllBudget();
         textView.setText((String.format("%2d",budgetList.size())));
 
 

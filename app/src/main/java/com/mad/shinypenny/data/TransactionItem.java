@@ -1,4 +1,4 @@
-package com.mad.shinypenny;
+package com.mad.shinypenny.data;
 
 import java.util.Date;
 
